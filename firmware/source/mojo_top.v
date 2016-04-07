@@ -29,7 +29,7 @@ module mojo_top(
   assign avr_rx = 1'bz;
   assign spi_channel = 4'bzzzz;
    
-  genvar i;
+/*  genvar i;
   generate
     for (i = 0; i < 8; i=i+1) begin: pwm_gen_loop
     pwm #(.CTR_LEN(3)) pwm (
@@ -39,6 +39,15 @@ module mojo_top(
       .pwm(led[i])
     );
     end
-  endgenerate
+  endgenerate*/
+  
+  input_capture #(.CAP_LEN(9)) input_capture (
+    .clk(clk),
+    .rst(rst),
+    .compare(compare), //compare register
+    .capture_in(capture_in), //physical pin to measure
+    .capture(capture), //register value
+    .overflow(overflow) //error
+  );
    
 endmodule
